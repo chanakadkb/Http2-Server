@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Chanakadkb. (http://medium.com/geek-with-chanaka) All Rights Reserved.
+ * Copyright (c) 2017, Chanakadkb. (http://medium.com/@chanakadkb) All Rights Reserved.
  */
 
 package http2.sample.server;
@@ -15,10 +15,9 @@ public class FrameListener extends Http2EventAdapter{
         Http2HeadersFrame frame=new DefaultHttp2HeadersFrame(headers,endStream,padding).setStreamId(streamId);
         ctx.fireChannelRead(frame);
     }
-
-    public int onDataRead(ChannelHandlerContext ctx, int streamId, ByteBuf data, int padding, boolean endOfStream) throws Http2Exception {
+/*    public int onDataRead(ChannelHandlerContext ctx, int streamId, ByteBuf data, int padding, boolean endOfStream) throws Http2Exception {
         Http2DataFrame frame=new DefaultHttp2DataFrame(data,endOfStream,padding).setStreamId(streamId);
         ctx.fireChannelRead(frame);
         return data.readableBytes() + padding;
-    }
+    }*/
 }

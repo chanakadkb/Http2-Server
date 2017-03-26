@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Chanakadkb. (http://medium.com/geek-with-chanaka) All Rights Reserved.
+ * Copyright (c) 2017, Chanakadkb. (http://medium.com/@chanakadkb) All Rights Reserved.
  */
 
 package http2.sample.server;

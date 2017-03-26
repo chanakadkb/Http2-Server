@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Chanakadkb. (http://medium.com/geek-with-chanaka) All Rights Reserved.
+ * Copyright (c) 2017, Chanakadkb. (http://medium.com/@chanakadkb) All Rights Reserved.
  */
 
 package http2.sample.server;
@@ -27,8 +27,7 @@ public class ServerInitilizer extends ChannelInitializer<SocketChannel> {
     }
 
     private static final Http2FrameLogger logger =
-            new Http2FrameLogger(INFO, //Change mode into INFO to log frames
-                    ServerInitilizer.class);
+            new Http2FrameLogger(INFO, ServerInitilizer.class);
 
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         Http2Connection connection = new DefaultHttp2Connection(true);
