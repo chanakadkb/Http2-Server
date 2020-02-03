@@ -59,15 +59,15 @@ public class SourceHandler extends ChannelDuplexHandler{
                         path("index.html").
                         add(HttpHeaderNames.CONTENT_TYPE,"text/html");
 
-                encoder.writePushPromise(ctx,frame.streamId(),prmiseId,prmiseHeader,0,promise);
+                encoder.writePushPromise(ctx,frame.stream().id(),prmiseId,prmiseHeader,0, promise);
 
                 ByteBuf promiseBuf= Unpooled.copiedBuffer(css.getBytes());
                 encoder.writeHeaders(ctx,prmiseId,prmiseHeader,0,false,promise);
                 encoder.writeData(ctx,prmiseId,promiseBuf,0,true,promise);
 
                 ByteBuf htmlBuf= Unpooled.copiedBuffer(html.getBytes());
-                encoder.writeHeaders(ctx,frame.streamId(),responseHeader,0,false,promise);
-                encoder.writeData(ctx,frame.streamId(),htmlBuf,0,true,promise);
+                encoder.writeHeaders(ctx,frame.stream().id(),responseHeader,0,false,promise);
+                encoder.writeData(ctx,frame.stream().id(),htmlBuf,0,true,promise);
 
                 ctx.flush();
             }else if(path.equalsIgnoreCase("/main.css")){
@@ -78,8 +78,8 @@ public class SourceHandler extends ChannelDuplexHandler{
                         path("main.css").
                         add(HttpHeaderNames.CONTENT_TYPE,"text/css");
                 ByteBuf cssBuf= Unpooled.copiedBuffer(css.getBytes());
-                encoder.writeHeaders(ctx,frame.streamId(),responseHeader,0,false,promise);
-                encoder.writeData(ctx,frame.streamId(),cssBuf,0,true,promise);
+                encoder.writeHeaders(ctx,frame.stream().id(),responseHeader,0,false,promise);
+                encoder.writeData(ctx,frame.stream().id(),cssBuf,0,true,promise);
                 ctx.flush();
 
             }else{
@@ -91,8 +91,8 @@ public class SourceHandler extends ChannelDuplexHandler{
                         path("index.html").
                         add(HttpHeaderNames.CONTENT_TYPE,"text/html");
                 ByteBuf htmlBuf= Unpooled.copiedBuffer(html.getBytes());
-                encoder.writeHeaders(ctx,frame.streamId(),responseHeader,0,false,promise);
-                encoder.writeData(ctx,frame.streamId(),htmlBuf,0,true,promise);
+                encoder.writeHeaders(ctx,frame.stream().id(),responseHeader,0,false,promise);
+                encoder.writeData(ctx,frame.stream().id(),htmlBuf,0,true,promise);
                 ctx.flush();
             }
         }

@@ -14,6 +14,7 @@ import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.SslProvider;
 import io.netty.handler.ssl.SupportedCipherSuiteFilter;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 
 import static io.netty.handler.logging.LogLevel.DEBUG;
@@ -31,7 +32,7 @@ public class ServerInitilizer extends ChannelInitializer<SocketChannel> {
 
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         Http2Connection connection = new DefaultHttp2Connection(true);
-        FrameListener frameListener = new FrameListener();
+        FrameListener frameListener = new FrameListener(connection);
         Http2ConnectionHandler connectionHandler = new Http2ConnectionHandlerBuilder().connection
                 (connection).
                 frameListener(frameListener).frameLogger(logger).build();
@@ -58,6 +59,7 @@ public class ServerInitilizer extends ChannelInitializer<SocketChannel> {
 
                             ApplicationProtocolNames.HTTP_2,
                             ApplicationProtocolNames.HTTP_1_1))
+                    .trustManager(InsecureTrustManagerFactory.INSTANCE)
                     .build();
         }catch (Exception e){
             sslCtx=null;
